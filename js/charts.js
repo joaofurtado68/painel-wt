@@ -8,8 +8,9 @@ function mkLegend(id,labels,vals,colors){const t=vals.reduce((a,b)=>a+b,0);docum
 
 function charts(){
   const td=cntBy(fil,'tipo'),tL=Object.keys(td),tV=Object.values(td);
-  kill('T');CH.T=mkDonut('cT',tL,tV,GR);mkLegend('lgT',tL,tV,GR);
-
+  const TIPO_C = {'Preventiva':'#2e7d32','Corretiva':'#f9a825','Preditiva':'#1565c0','Melhoria':'#6a1b9a'};
+  const tC = tL.map(l => TIPO_C[l] || '#888');
+  kill('T');CH.T=mkDonut('cT',tL,tV,tC);mkLegend('lgT',tL,tV,tC);
   const pd=cntBy(fil,'prio'),pO=['Urgente','Alta','Média','Baixa'].filter(p=>pd[p]),pV=pO.map(p=>pd[p]),pC=pO.map(p=>PC[p]);
   kill('P');CH.P=mkDonut('cP',pO,pV,pC);mkLegend('lgP',pO,pV,pC);
 
